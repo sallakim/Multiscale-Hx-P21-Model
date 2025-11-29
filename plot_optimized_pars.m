@@ -33,7 +33,7 @@ for i = 1:length(selected_nx)
     animal_id = selected_nx(i);  % get the current animal number 
     
     % Check if the file exists
-    filename = sprintf('opt_pars_Nx%d.mat', animal_id);  % get the file name
+    filename = sprintf('opt_pars_Nx%d_NEW_largebounds_2025.mat', animal_id);  % get the file name
     if exist(filename, 'file') == 2  
         load(filename);  % load file  
         counter = counter + 1; 
@@ -53,7 +53,7 @@ for i = 1:length(selected_hx)
     animal_id = selected_hx(i);  
     
     % Check if the file exists 
-    filename = sprintf('opt_pars_Hx%d.mat', animal_id);
+    filename = sprintf('opt_pars_Hx%d_NEW_largebounds_2025.mat', animal_id);
     if exist(filename, 'file') == 2  
         load(filename);  
         counter = counter + 1;  

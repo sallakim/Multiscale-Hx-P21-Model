@@ -33,23 +33,23 @@ time = outputs.time;
 if nx_or_hx_flag == 0
     hfig4a = figure(400); 
     sgtitle('RV: Optimized Model + Data')
-    subplot(3,4,i_exp)
+    subplot(4,3,i_exp)
     hold on 
-    plot(V_RV_stack/1000,P_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    % plot(V_RV_stack/1000,P_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
     plot(V_RV_avg/1000,P_RV_avg,'k','LineWidth',1)
     plot(V_RV,P_RV,'b','LineWidth',2)
-    title('Nx',label)
+    title(label)
     ylim([0 50])
     xlim([0,0.08])
 
     hfig4c = figure(402);
     sgtitle('LV: Optimized Model + Data')
-    subplot(3,4,i_exp)
+    subplot(4,3,i_exp)
     hold on 
-    plot(V_LV_stack/1000,P_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    % plot(V_LV_stack/1000,P_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
     plot(V_LV_avg/1000,P_LV_avg,'k','LineWidth',1)
     plot(V_LV,P_LV,'r','LineWidth',2)
-    title('Nx',label)
+    title(label)
     ylim([0 100])
     xlim([0,0.08])
 end
@@ -57,23 +57,23 @@ end
 if nx_or_hx_flag == 1
     hfig4b = figure(401); 
     sgtitle('RV: Optimized Model + Data')
-    subplot(3,4,i_exp)
+    subplot(4,3,i_exp)
     hold on 
-    plot(V_RV_stack/1000,P_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    % plot(V_RV_stack/1000,P_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
     plot(V_RV_avg/1000,P_RV_avg,'k','LineWidth',1)
     plot(V_RV,P_RV,'b','LineWidth',2)
-    title('Hx',label)
+    title(label)
     ylim([0 50])
     xlim([0,0.08])
 
     hfig4d = figure(403);
     sgtitle('LV: Optimized Model + Data')
-    subplot(3,4,i_exp)
+    subplot(4,3,i_exp)
     hold on 
-    plot(V_LV_stack/1000,P_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    % plot(V_LV_stack/1000,P_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
     plot(V_LV_avg/1000,P_LV_avg,'k','LineWidth',1)
     plot(V_LV,P_LV,'r','LineWidth',2)
-    title('Hx',label)
+    title(label)
     ylim([0 100])
     xlim([0,0.08])
 end

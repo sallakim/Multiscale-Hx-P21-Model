@@ -6,7 +6,7 @@ addpath outputs\
 clear 
 clc
 
-savefigs = 0; % = 1 saves the figures
+savefigs = 1; % = 1 saves the figures
 
 selected_nx = [11 12 51 52 54 55 56];
 selected_hx = [1 4 5 7 8 9 10 57 58 59 61 62]; 
@@ -16,7 +16,7 @@ for i = 1:length(selected_nx)
     nx_or_hx_flag = 0; % = 0 for Nx, = 1 for Hx
     animal_id = selected_nx(i); % get the current animal 
     filename = sprintf('outputs_Nx%d.mat', animal_id); % get the files to load
-    filename2 = sprintf('opt_pars_Nx%d.mat', animal_id);
+    filename2 = sprintf('opt_pars_Nx%d_NEW_largebounds_2025.mat', animal_id);
     load(filename)
     load(filename2,'pars_opt')
     pars_opt = exp(pars_opt);
@@ -40,7 +40,7 @@ for i = 1:length(selected_nx)
     power_SEP_nx(i) = max(abs(diff(work_SEP)./diff(time)));
     power_RV_nx(i) = max(abs(diff(work_RV)./diff(time)));
     
-    CP_RV_nx(i) = trapz(P_RV,V_RV);
+    SW_RV_nx(i) = trapz(P_RV,V_RV);
     
     max_strain_SEP_nx (i) = max((Lsc_SEP - Lsc_SEP(1))./Lsc_SEP(1)); 
     max_strain_LV_nx (i) = max((Lsc_LV - Lsc_LV(1))./Lsc_LV(1)); 
@@ -52,6 +52,8 @@ for i = 1:length(selected_nx)
     P_PA_mean_nx(i) = mean(P_PA); 
     
     Amref_RV_nx(i) = pars_opt(13);
+
+    C_PA_nx(i) = pars_opt(3);
     
     % Find ejection
     i_AVO = find(diff(Q_a_valve) > 0,1,'first'); % Start of sytole 
@@ -69,13 +71,15 @@ for i = 1:length(selected_nx)
     P_PV = outputs.pressures.P_PV; 
     P_PV_mean_nx(i) = mean(P_PV); 
 
+    L_s_RV_mean_Nx(i) = mean(Lsc_RV);
+
 end
 
 for i = 1:length(selected_hx)
     nx_or_hx_flag = 1; % = 0 for Nx, = 1 for Hx
     animal_id = selected_hx(i); % get the current animal
     filename = sprintf('outputs_Hx%d.mat', animal_id); % get the files to load
-    filename2 = sprintf('opt_pars_Hx%d.mat', animal_id);
+    filename2 = sprintf('opt_pars_Hx%d_NEW_largebounds_2025.mat', animal_id);
     load(filename)
     load(filename2,'pars_opt')
     pars_opt = exp(pars_opt);
@@ -99,7 +103,7 @@ for i = 1:length(selected_hx)
     power_SEP_hx(i) = max(abs(diff(work_SEP)./diff(time)));
     power_RV_hx(i) = max(abs(diff(work_RV)./diff(time)));
 
-    CP_RV_hx(i) = trapz(P_RV,V_RV);
+    SW_RV_hx(i) = trapz(P_RV,V_RV);
     
     max_strain_SEP_hx (i) = max((Lsc_SEP - Lsc_SEP(1))./Lsc_SEP(1)); 
     max_strain_LV_hx (i) = max((Lsc_LV - Lsc_LV(1))./Lsc_LV(1)); 
@@ -111,6 +115,8 @@ for i = 1:length(selected_hx)
     P_PA_mean_hx(i) = mean(P_PA); 
     
     Amref_RV_hx(i) = pars_opt(13);
+
+    C_PA_hx(i) = pars_opt(3);
     
     % Find ejection
     i_AVO = find(diff(Q_a_valve) > 0,1,'first'); % Start of sytole 
@@ -127,6 +133,8 @@ for i = 1:length(selected_hx)
 
     P_PV = outputs.pressures.P_PV; 
     P_PV_mean_hx(i) = mean(P_PV); 
+
+    L_s_RV_mean_Hx(i) = mean(Lsc_RV);
 
 end
 
@@ -148,9 +156,9 @@ boxplot(power_RV,grp,'Colors','k')
 swarmchart(1*x1,power_RV(1:7),50,[0.07,.77,0.44],'jitter','on','jitterAmount',0.05,'MarkerFaceColor',[0.07,.77,0.44])
 swarmchart(2*x2,power_RV(8:19),50,[0.6,0.4,1.0],'jitter','on','jitterAmount',0.05,'MarkerFaceColor',[0.6,0.4,1.0])
 xlim([0.5 2.5])
-ylim([10 80])
+ylim([20 90])
 xticklabels({'Nx','Hx'})
-ylabel('Myofiber Power Intensity (Watt per m^2)')
+ylabel('Myofiber Power Intensity (W per m^2)')
 set(gcf, 'Renderer', 'painters')
 set(gca,'fontsize',12)
 % set(gca,'TickLabelInterpreter','latex')
@@ -168,7 +176,7 @@ boxplot(power_LV,grp,'Colors','k')
 swarmchart(1*x1,power_LV(1:7),50,[0.07,.77,0.44],'jitter','on','jitterAmount',0.05,'MarkerFaceColor',[0.07,.77,0.44])
 swarmchart(2*x2,power_LV(8:19),50,[0.6,0.4,1.0],'jitter','on','jitterAmount',0.05,'MarkerFaceColor',[0.6,0.4,1.0])
 xlim([0.5 2.5])
-ylim([10 80])
+ylim([10 130])
 xticklabels({'Nx','Hx'})
 set(gcf, 'Renderer', 'painters')
 set(gca,'fontsize',12)
@@ -200,45 +208,55 @@ for i = 1:length(input2_hx)
     text(input1_hx(i),input2_hx(i),num2str(i+length(input1_nx)),FontSize=10)
 end
 title({["Spearman, \rho = " + num2str(round(RHO_S,2)) + ", \rho' = " + num2str(round(rho_s,2))], ["Pearson, \rho = " + num2str(round(RHO_P,2)) + ", \rho' = " + num2str(round(rho_p,2))]})
-% disp(pval_p)
+disp(pval_p)
 set(gca, 'FontSize', 12);
 end
 
 hfig2 = figure(2);
 clf
 
-% Create a tiled layout for 2 row and 2 columns
+% Create a tiled layout for 1 row and 3 columns
 t = tiledlayout(2, 2, 'TileSpacing', 'compact', 'Padding', 'compact');
 
 % First Subplot (Cm_drop vs RV CP) 
 nexttile
 hold on 
-corrplot(Cm_drop_nx,Cm_drop_hx,CP_RV_nx,CP_RV_hx);
-ylabel('RV CP','FontSize',20)
+corrplot(Cm_drop_nx,Cm_drop_hx,SW_RV_nx,SW_RV_hx);
+ylabel('RV SW','FontSize',20)
 xlabel('${\Delta}C_{m,SEP}$','interpreter','latex','FontSize',20)
 
 % Second Subplot (Amref_RV vs Mean PA Pressure)
 nexttile
 hold on 
-corrplot(Amref_RV_nx,Amref_RV_hx,P_PA_mean_nx,P_PA_mean_hx);
-ylabel('mPAP','FontSize',20)
-xlabel('$A_{m,ref,RV}$','interpreter','latex','FontSize',20)
+corrplot(P_PA_mean_nx,P_PA_mean_hx,Amref_RV_nx,Amref_RV_hx);
+ylabel('$A_{m,ref,RV}$','interpreter','latex','FontSize',20)
+xlabel('mPAP','FontSize',20)
 
 % Third Subplot (Cm_drop vs Mean PA Pressure) 
 nexttile
 hold on
-corrplot(Cm_drop_nx,Cm_drop_hx,P_PA_mean_nx,P_PA_mean_hx);
-ylabel('mPAP','FontSize',20)
-xlabel('${\Delta}C_{m,SEP}$','interpreter','latex','FontSize',20)
+corrplot(P_PA_mean_nx,P_PA_mean_hx,Cm_drop_nx,Cm_drop_hx);
+ylabel('${\Delta}C_{m,SEP}$','interpreter','latex','FontSize',20)
+xlabel('mPAP','FontSize',20)
 
 nexttile
 hold on
-corrplot(P_PA_mean_nx,P_PA_mean_hx,power_RV_nx,power_RV_hx); 
-ylabel('Myofiber Power','FontSize',20)
-xlabel('mPAP','FontSize',20)
+corrplot(Cm_drop_nx,Cm_drop_hx,Amref_RV_nx,Amref_RV_hx); 
+ylabel('$A_{m,ref,RV}$','interpreter','latex','FontSize',20)
+xlabel('${\Delta}C_{m,SEP}$','interpreter','latex','FontSize',20)
 
 
 %% t-tests
+[h,p] = ttest2(L_s_RV_mean_Nx,L_s_RV_mean_Hx); % h = 1 reject the hypothesis 
+fprintf('mean RV Ls nx vs mean RV Ls hx: \n')
+fprintf('nx: %.2d, hx %.2d \n',mean(L_s_RV_mean_Nx),mean(L_s_RV_mean_Hx))
+fprintf('std nx: %.2d, std hx %.2d \n',std(L_s_RV_mean_Nx),std(L_s_RV_mean_Hx))
+if h == 1
+    fprintf('The means are different, p = %.2d \n\n',p)
+else
+    fprintf('The means are not different, p = %.2d \n\n',p)
+end
+
 [h,p] = ttest2(Cm_systole_nx,Cm_systole_hx); % h = 1 reject the hypothesis 
 fprintf('Average curvature over systole for nx vs hx: \n')
 fprintf('nx: %.2d, hx %.2d \n',mean(Cm_systole_nx),mean(Cm_systole_hx))
@@ -263,6 +281,17 @@ end
 fprintf('mPAP nx vs mPAP hx: \n')
 fprintf('nx: %.2d, hx %.2d \n',mean(P_PA_mean_nx),mean(P_PA_mean_hx))
 fprintf('std nx: %.2d, std hx %.2d \n',std(P_PA_mean_nx),std(P_PA_mean_hx))
+if h == 1
+    fprintf('The means are different, p = %.2d \n\n',p)
+else
+    fprintf('The means are not different, p = %.2d \n\n',p)
+end
+
+
+[h,p] = ttest2(power_RV_nx,power_RV_hx); % h = 1 reject the hypothesis 
+fprintf('RV power nx vs RV power hx: \n')
+fprintf('nx: %.2d, hx %.2d \n',mean(power_RV_nx),mean(power_RV_hx))
+fprintf('std nx: %.2d, std hx %.2d \n',std(power_RV_nx),std(power_RV_hx))
 if h == 1
     fprintf('The means are different, p = %.2d \n',p)
 else

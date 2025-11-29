@@ -6,13 +6,13 @@ clear;clc;
 
 %% Initialization 
 % Flags
-flag_optpars = 1;      % = 1 will run the optimized parameters, else nominal  
-flag_save_figures = 0; % = 1 will save the figures as .eps and .png files
+flag_optpars = 0;      % = 1 will run the optimized parameters, else nominal  
+flag_save_figures = 1; % = 1 will save the figures as .eps and .png files
 flag_save_outputs = 1; % = 1 will save the outputs as .mat files 
 
 % Select animals to run 
-selected_nx = [54];
-selected_hx = [8];  
+selected_nx = [11 12 51 52 54 55 56];
+selected_hx = [1, 4, 5, 7, 8, 9, 10, 57, 58, 59, 61, 62];   
 
 % Animal information 
 all_nx_animal_ids = [11 12 51 52 54 55 56];
@@ -90,7 +90,7 @@ for n = 1:length(selected_nx)
     % Plot 
     data_filename = sprintf('Nx%d_data.mat',animal_id);
     load(data_filename);
-    plot_PV_loops(outputs,n,nx_label,nx_or_hx_flag,V_LV_mult,V_LV_mean,P_LV_mult,P_LV_mean,V_RV_mult,V_RV_mean,P_RV_mult,P_RV_mean)
+    % plot_PV_loops(outputs,n,nx_label,nx_or_hx_flag,V_LV_mult,V_LV_mean,P_LV_mult,P_LV_mean,V_RV_mult,V_RV_mean,P_RV_mult,P_RV_mean)
     plot_pv_timecourse(outputs,n,nx_label,nx_or_hx_flag,V_LV_mult,V_LV_mean,P_LV_mult,P_LV_mean,V_RV_mult,V_RV_mean,P_RV_mult,P_RV_mean)
 end
 end
@@ -139,7 +139,7 @@ for n = 1:length(selected_hx)
     % Plot 
     data_filename = sprintf('Hx%d_data.mat',animal_id);
     load(data_filename);
-    plot_PV_loops(outputs,n,hx_label,nx_or_hx_flag,V_LV_mult,V_LV_mean,P_LV_mult,P_LV_mean,V_RV_mult,V_RV_mean,P_RV_mult,P_RV_mean)
+    % plot_PV_loops(outputs,n,hx_label,nx_or_hx_flag,V_LV_mult,V_LV_mean,P_LV_mult,P_LV_mean,V_RV_mult,V_RV_mean,P_RV_mult,P_RV_mean)
     plot_pv_timecourse(outputs,n,hx_label,nx_or_hx_flag,V_LV_mult,V_LV_mean,P_LV_mult,P_LV_mean,V_RV_mult,V_RV_mean,P_RV_mult,P_RV_mean)
 end
 end

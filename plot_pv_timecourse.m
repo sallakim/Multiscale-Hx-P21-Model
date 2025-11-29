@@ -36,12 +36,14 @@ time = outputs.time;
 loc_half_time = round(length(time)/2); 
 time_50 = linspace(0,time(loc_half_time),50);
 
+grey = [.8 .8 .8]; 
+
 if nx_or_hx_flag == 0
     hfig4a = figure(405); 
     sgtitle('RV: Pressure')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,P_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,P_RV_stack,'Color',grey,'LineWidth',1)
     plot(time_50,P_RV_avg,'k','LineWidth',1)
     plot(time(1:loc_half_time),P_RV(1:loc_half_time),'b','LineWidth',2)
     title('Nx',label)
@@ -50,7 +52,7 @@ if nx_or_hx_flag == 0
     sgtitle('RV: Volume')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,V_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,V_RV_stack/1000,'Color',grey,'LineWidth',1)
     plot(time_50,V_RV_avg/1000,'k','LineWidth',1)
     plot(time(1:loc_half_time),V_RV(1:loc_half_time),'b','LineWidth',2)
     title('Nx',label)
@@ -59,7 +61,7 @@ if nx_or_hx_flag == 0
     sgtitle('LV: Pressure')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,P_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,P_LV_stack,'Color',grey,'LineWidth',1)
     plot(time_50,P_LV_avg,'k','LineWidth',1)
     plot(time(1:loc_half_time),P_LV(1:loc_half_time),'r','LineWidth',2)
     title('Nx',label)
@@ -68,7 +70,7 @@ if nx_or_hx_flag == 0
     sgtitle('LV: Volume')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,V_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,V_LV_stack/1000,'Color',grey,'LineWidth',1)
     plot(time_50,V_LV_avg/1000,'k','LineWidth',1)
     plot(time(1:loc_half_time),V_LV(1:loc_half_time),'r','LineWidth',2)
     title('Nx',label)
@@ -88,7 +90,7 @@ if nx_or_hx_flag == 1
     sgtitle('RV: Pressure')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,P_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,P_RV_stack,'Color',grey,'LineWidth',1)
     plot(time_50,P_RV_avg,'k','LineWidth',1)
     plot(time(1:loc_half_time),P_RV(1:loc_half_time),'b','LineWidth',2)
     title('Hx',label)
@@ -97,7 +99,7 @@ if nx_or_hx_flag == 1
     sgtitle('RV: Volume')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,V_RV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,V_RV_stack/1000,'Color',grey,'LineWidth',1)
     plot(time_50,V_RV_avg/1000,'k','LineWidth',1)
     plot(time(1:loc_half_time),V_RV(1:loc_half_time),'b','LineWidth',2)
     title('Hx',label)
@@ -106,7 +108,7 @@ if nx_or_hx_flag == 1
     sgtitle('LV: Pressure')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,P_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,P_LV_stack,'Color',grey,'LineWidth',1)
     plot(time_50,P_LV_avg,'k','LineWidth',1)
     plot(time(1:loc_half_time),P_LV(1:loc_half_time),'r','LineWidth',2)
     title('Hx',label)
@@ -115,7 +117,7 @@ if nx_or_hx_flag == 1
     sgtitle('LV: Volume')
     subplot(3,4,i_exp)
     hold on 
-    % plot(time,V_LV_stack,'Color',[.9 .9 .9],'LineWidth',1)
+    plot(time_50,V_LV_stack/1000,'Color',grey,'LineWidth',1)
     plot(time_50,V_LV_avg/1000,'k','LineWidth',1)
     plot(time(1:loc_half_time),V_LV(1:loc_half_time),'r','LineWidth',2)
     title('Hx',label)

@@ -4,11 +4,11 @@ clear all
 addpath raw_data\smoothed_data\
 
 condition_flags = {'Hx f'};
-load Hx56_LV_reshape.mat 
+load Hx59_LV_reshape.mat 
 V_LV_avg = V_ven_avg; V_LV_stack = V_ven_stack; P_LV_avg = P_ven_avg; P_LV_stack = P_ven_stack; T_LV = T;
-load Hx56_RV_reshape.mat
+load Hx59_RV_reshape.mat
 V_RV_avg = V_ven_avg; V_RV_stack = V_ven_stack; P_RV_avg = P_ven_avg; P_RV_stack = P_ven_stack; T_RV = T;
-filename = 'Hx56_data.mat';
+filename = 'Hx_delete.mat';
 
 %% Data 
 V_LV_avg_min = min(V_LV_avg); V_RV_avg_min = min(V_RV_avg); 

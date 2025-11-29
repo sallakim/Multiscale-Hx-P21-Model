@@ -5,7 +5,7 @@ for LV, SEP, and RV.
 
 addpath outputs 
 
-savefigs = 0; % = 1
+savefigs = 1; % = 1
 
 % Select animals to run 
 selected_nx = [11 12 51 52 54 55 56];
@@ -50,7 +50,7 @@ fig3 = figure(702); clf;
 
 y1_patch = [-.2, -.2, -.18, -.18];
 y2_patch = [0 0 .25 .25];
-y3_patch = [-4 -4 -3.75 -3.75];
+y3_patch = [-5 -5 -4.75 -4.75];
 
 %% Nx
 if exist('selected_nx','var')
@@ -95,9 +95,9 @@ for i = 1:length(selected_nx)
     subplot(2,3,1)
     hold on
     title('LV')
-    plot(time_norm,(Ls_LV - Ls_LV(1))./Ls_LV(1),'Color',color_codes(i,:))
+    plot(time_norm,(Ls_LV - Ls_LV(1))./Ls_LV(1),'Color', green) %color_codes(i,:))
     xlim([0,T])
-    ylim([-.2,.1])
+    ylim([-.2,.15])
     set(gca,'FontSize',10)
     makepatch(y1_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -105,9 +105,9 @@ for i = 1:length(selected_nx)
     subplot(2,3,2)
     hold on
     title('SEP')
-    plot(time_norm,(Ls_SEP - Ls_SEP(1))./Ls_SEP(1),'Color',color_codes(i,:))
+    plot(time_norm,(Ls_SEP - Ls_SEP(1))./Ls_SEP(1),'Color', green) %color_codes(i,:))
     xlim([0,T])
-    ylim([-.2,.1])
+    ylim([-.2,.15])
     set(gca,'FontSize',10)
     makepatch(y1_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -115,9 +115,9 @@ for i = 1:length(selected_nx)
     subplot(2,3,3)
     hold on
     title('RV')
-    plot(time_norm,(Ls_RV - Ls_RV(1))./Ls_RV(1),'Color',color_codes(i,:))
+    plot(time_norm,(Ls_RV - Ls_RV(1))./Ls_RV(1),'Color', green) %color_codes(i,:))
     xlim([0,T])
-    ylim([-.2,.1])
+    ylim([-.2,.15])
     set(gca,'FontSize',10)
     makepatch(y1_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -127,27 +127,27 @@ for i = 1:length(selected_nx)
     subplot(2,3,1)
     hold on 
     title('LV')
-    plot(time_norm,Cm_LV,'Color',color_codes(i,:))
+    plot(time_norm,Cm_LV,'Color',green) %color_codes(i,:))
     xlim([0,T])
-    ylim([-4 0])
+    ylim([-5 -3])
     set(gca,'FontSize',10)
     makepatch(y3_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
     subplot(2,3,2)
     hold on 
     title('SEP')
-    plot(time_norm,Cm_SEP,'Color',color_codes(i,:))
+    plot(time_norm,Cm_SEP,'Color',green) %color_codes(i,:))
     xlim([0,T])
-    ylim([0 4])
+    ylim([-.25 4.75])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
     subplot(2,3,3)
     hold on 
     title('RV')
-    plot(time_norm,Cm_RV,'Color',color_codes(i,:))
+    plot(time_norm,Cm_RV,'Color',green) %color_codes(i,:))
     xlim([0,T])
-    ylim([0 4])
+    ylim([-.25 4.75])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -160,7 +160,7 @@ for i = 1:length(selected_nx)
     title('LV')
     plot(time_norm,(Ls_LV/10000),'Color',green)
     xlim([0,T])
-    ylim([1 2.5])
+    ylim([1 3])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -170,7 +170,7 @@ for i = 1:length(selected_nx)
     title('Septum')
     plot(time_norm,(Ls_SEP/10000),'Color',green)
     xlim([0,T])
-    ylim([1 2.5])
+    ylim([1 3])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -180,7 +180,7 @@ for i = 1:length(selected_nx)
     title('RV')
     plot(time_norm,(Ls_RV/10000),'Color',green)
     xlim([0,T])
-    ylim([1 2.5])
+    ylim([1 3])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
     
@@ -257,25 +257,25 @@ for i = 1:length(selected_hx)
     figure(700);
     subplot(2,3,4)
     hold on
-    plot(time_norm,(Ls_LV - Ls_LV(1))./Ls_LV(1),'Color',color_codes(i,:))
+    plot(time_norm,(Ls_LV - Ls_LV(1))./Ls_LV(1),'Color', purple) %color_codes(i,:))
     xlim([0,T])
-    ylim([-.2,.1])
+    ylim([-.2,.15])
     set(gca,'FontSize',10)
     makepatch(y1_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
     subplot(2,3,5)
     hold on
-    plot(time_norm,(Ls_SEP - Ls_SEP(1))./Ls_SEP(1),'Color',color_codes(i,:))
+    plot(time_norm,(Ls_SEP - Ls_SEP(1))./Ls_SEP(1),'Color', purple) %color_codes(i,:))
     xlim([0,T])
-    ylim([-.2,.1])
+    ylim([-.2,.15])
     set(gca,'FontSize',10)
     makepatch(y1_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
     subplot(2,3,6)
     hold on
-    plot(time_norm,(Ls_RV - Ls_RV(1))./Ls_RV(1),'Color',color_codes(i,:))
+    plot(time_norm,(Ls_RV - Ls_RV(1))./Ls_RV(1),'Color', purple) %color_codes(i,:))
     xlim([0,T])
-    ylim([-.2,.1])
+    ylim([-.2,.15])
     set(gca,'FontSize',10)
     makepatch(y1_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -283,25 +283,25 @@ for i = 1:length(selected_hx)
     figure(701);
     subplot(2,3,4)
     hold on 
-    plot(time_norm,Cm_LV,'Color',color_codes(i,:))
+    plot(time_norm,Cm_LV,'Color', purple) %color_codes(i,:))
     xlim([0,T])
-    ylim([-4 0])
+    ylim([-5 -3])
     set(gca,'FontSize',10)
     makepatch(y3_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
     subplot(2,3,5)
     hold on 
-    plot(time_norm,Cm_SEP,'Color',color_codes(i,:))
+    plot(time_norm,Cm_SEP,'Color', purple) %color_codes(i,:))
     xlim([0,T])
-    ylim([0 4])
+    ylim([-.25 4.75])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
     subplot(2,3,6)
     hold on 
-    plot(time_norm,Cm_RV,'Color',color_codes(i,:))
+    plot(time_norm,Cm_RV,'Color', purple) %color_codes(i,:))
     xlim([0,T])
-    ylim([0 4])
+    ylim([-.25 4.75])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -313,7 +313,7 @@ for i = 1:length(selected_hx)
     title('LV')
     plot(time_norm,(Ls_LV/10000),'Color',purple)
     xlim([0,T])
-    ylim([1 2.5])
+    ylim([1 3])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -323,7 +323,7 @@ for i = 1:length(selected_hx)
     title('Septum')
     plot(time_norm,(Ls_SEP/10000),'Color',purple)
     xlim([0,T])
-    ylim([1 2.5])
+    ylim([1 3])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
@@ -333,7 +333,7 @@ for i = 1:length(selected_hx)
     title('RV')
     plot(time_norm,(Ls_RV/10000),'Color',purple)
     xlim([0,T])
-    ylim([1 2.5])
+    ylim([1 3])
     set(gca,'FontSize',10)
     makepatch(y2_patch,T_AVO, T_AVC, T_MVO, T_MVC, orange, blue)
 
